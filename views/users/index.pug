@@ -1,13 +1,23 @@
-h1 users
-form(action="/users/search", method="get")
-    input(type="text" ,name="q", value=input)
-    button search
+extend ../layout/common
+block content 
+    h1 users
+        a.btn.btn-primary.ml-2(href='../users/create') Create New User
+    .form-group.mt-2
+        label(for="") Search user by name
+        form(action="/users/search", method="get",class="d-flex")
+            input(type="text" ,name="q",class="form-control")
+            button(class="btn btn-primary ml-2") search
+    table.table.table-border
+        tr  
+            th Name
+            th Phone
+            th Action
+        each user in users
+            tr
+                td=user.name
+                td=user.phone
+                td  
+                    a(href="/users/view/" + user.id) view
 
-ul
-    each user in users
-        li
-            span= user.name
-            span &nbsp
-            a(href='/users/view/' + user.id ) View
-
-a(href='../users/create') Create New User
+   
+    
