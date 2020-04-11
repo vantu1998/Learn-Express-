@@ -1,0 +1,22 @@
+extend ../layout/common
+block content
+        h1 Products
+        form(action="", method="get")
+            .form-group.d-flex.justify-content-end
+                input.form-control.col-md-4(name="name")
+                button.btn.btn-primary.ml-2  Search
+        .row
+            each product in products
+                .col-md-4.col-sm-6
+                    .card
+                        img.card-img-top(src="" + product.image)
+                        .card-body
+                            h5.card-title= product.name
+                            p.card-text= product.description
+                            a.btn.btn-primary Add to cart
+        .row.d-flex.justify-content-center.mt-5
+            nav
+                ul.pagination
+                    each pageItem in pageItems
+                        li.page-item
+                            a.page-link(href="/products?page=" + pageItem)= pageItem
