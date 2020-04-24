@@ -1,21 +1,22 @@
 var md5 = require('md5');
 var User = require('../models/user.model');
 
-module.exports.login = (req,res) => {
+module.exports.login = (req, res) => {
     res.render('auth/login');
 }
 
-module.exports.postLogin = async (req,res) =>{
+module.exports.postLogin = async (req, res) => {
     var email = req.body.email;
     var password = req.body.password;
     var values = req.body;
     var user;
-    await User.find({email: email},(err,users)=>{
-        user = users[0];
+    await User.findOne({ email: email }).then((doc) => {
+        user = doc;
     })
-    
-    if(!user){
-        res.render('auth/login',{
+
+
+    if (!user) {
+        res.render('auth/login', {
             errors: [
                 "Can't find user"
             ],
@@ -24,8 +25,8 @@ module.exports.postLogin = async (req,res) =>{
         return;
     }
     var hashePass = md5(password);
-    if(hashePass !== user.password){
-        res.render('auth/login',{
+    if (hashePass !== user.password) {
+        res.render('auth/login', {
             errors: [
                 'Wrong password'
             ],
@@ -33,7 +34,7 @@ module.exports.postLogin = async (req,res) =>{
         })
         return;
     }
-    res.cookie('userId',user._id,{
+    res.cookie('userId', user._id, {
         signed: true
     });
     res.redirect('/users');

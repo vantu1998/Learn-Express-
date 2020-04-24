@@ -4,9 +4,9 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB Connected...'))
-    .catch((err) => console.log('have err'+err))
+    .catch((err) => console.log('have err' + err))
 
 var app = express();
 var port = 3000;
@@ -15,6 +15,7 @@ var userRoutes = require('./routes/user.route');
 var authRoutes = require('./routes/auth.route');
 var productRoutes = require('./routes/product.router');
 var cartRoute = require('./routes/cart.route');
+var productApiRoute = require('./api/routes/product.route');
 var authMd = require('./middlewares/auth.middleware');
 var sessionMd = require('./middlewares/session.middeleware');
 
@@ -27,20 +28,20 @@ app.use(sessionMd);
 
 
 // setup view engine
-app.set('view engine','pug');
-app.set('views','./views')
+app.set('view engine', 'pug');
+app.set('views', './views')
 
-app.get('/',function(request,response){
-    response.render('index',{
+app.get('/', function (request, response) {
+    response.render('index', {
         name: 'wellcome'
     })
 })
 
-app.use('/auth',authRoutes);
-app.use('/users',userRoutes);
-app.use('/products',productRoutes);
-app.use('/cart',cartRoute);
-
+app.use('/auth', authRoutes);
+app.use('/users', authMd.requireAuth, userRoutes);
+app.use('/products', productRoutes);
+app.use('/cart', cartRoute);
+app.use('/api/product',productApiRoute);
 // var db = require('./db');
 // var products = db.get('products').value();
 // // var Product = require('./models/product.model');
@@ -57,7 +58,7 @@ app.use('/cart',cartRoute);
 // console.log(products.length)
 
 
-app.listen(port,function(){
+app.listen(port, function () {
     console.log("App listen on port " + port);
 })
 
