@@ -9,7 +9,7 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopol
     .catch((err) => console.log('have err' + err))
 
 var app = express();
-var port = 3000;
+var port = process.env.PORT || 3000;
 
 var userRoutes = require('./routes/user.route');
 var authRoutes = require('./routes/auth.route');
