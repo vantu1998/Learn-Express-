@@ -38,7 +38,7 @@ app.get('/', function (request, response) {
 })
 
 app.use('/auth', authRoutes);
-app.use('/users', authMd.requireAuth, userRoutes);
+app.use('/users',  userRoutes);
 app.use('/products', productRoutes);
 app.use('/cart', cartRoute);
 app.use('/api/product',productApiRoute);
