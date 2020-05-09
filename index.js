@@ -44,17 +44,17 @@ app.use('/cart', cartRoute);
 app.use('/api/product',productApiRoute);
 // var db = require('./db');
 // var products = db.get('products').value();
-// // var Product = require('./models/product.model');
-// // var data = products.map((item)=>{
-// //     var obj = {};
-// //     let pro = new Product({
-// //         name:item.name,
-// //         image:item.image,
-// //         description:item.description
-// //     })
-// //     pro.save().then(doc=>console.log(doc)).catch(err=>console.log(err));
+// var Product = require('./models/product.model');
+// var data = products.map((item)=>{
+//     var obj = {};
+//     let pro = new Product({
+//         name:item.name,
+//         image:item.image,
+//         description:item.description
+//     })
+//     pro.save().then(doc=>console.log(doc)).catch(err=>console.log(err));
 
-// // })
+// })
 // console.log(products.length)
 
 
