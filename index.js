@@ -3,7 +3,7 @@ require('dotenv').config();
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
-
+var cors = require('cors');
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB Connected...'))
     .catch((err) => console.log('have err' + err))
@@ -25,6 +25,7 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cookieParser(process.env.SESION_SECRET));
 app.use(sessionMd);
+app.use(cors());
 
 
 // setup view engine
