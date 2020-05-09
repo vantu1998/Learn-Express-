@@ -27,11 +27,11 @@ module.exports.create = (req,res)=>{
 }
 
 module.exports.postCreate = (req,res)=>{
-    req.body.avatar = req.file.path.split('\\').slice(1).join('/');
+    // req.body.avatar = req.file.path.split('\\').slice(1).join('/');
     var user = new User({
         email: req.body.email,
         password: req.body.pass,
-        avatar: req.body.avatar,
+        // avatar: req.body.avatar,
         phone: req.body.phone,
         name: req.body.name
     });
