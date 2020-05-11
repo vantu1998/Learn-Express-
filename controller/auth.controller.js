@@ -24,7 +24,7 @@ module.exports.postLogin = async (req, res) => {
         })
         return;
     }
-    var hashePass = md5(password);
+    var hashePass = password;
     if (hashePass !== user.password) {
         res.render('auth/login', {
             errors: [

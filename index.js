@@ -18,7 +18,7 @@ var cartRoute = require('./routes/cart.route');
 var productApiRoute = require('./api/routes/product.route');
 var authMd = require('./middlewares/auth.middleware');
 var sessionMd = require('./middlewares/session.middeleware');
-
+var userApiRoute = require('./api/routes/user.route');
 
 app.use(express.static('public'));
 app.use(express.json()) // for parsing application/json
@@ -43,6 +43,7 @@ app.use('/users',  userRoutes);
 app.use('/products', productRoutes);
 app.use('/cart', cartRoute);
 app.use('/api/product',productApiRoute);
+app.use('/api/user',userApiRoute);
 // var db = require('./db');
 // var products = db.get('products').value();
 // var Product = require('./models/product.model');
